@@ -2,12 +2,9 @@ import numpy as np
 import cv2
 import random
 import string
-import requests
-import sys
-import requests
+import NetworkThread    # local
 import re
-import threading
-import time
+from datetime import datetime
 
   # Config Vars --------------------------------------------
 # - Recognotion
@@ -15,15 +12,8 @@ videoFileName = "test.mp4"
 cameraDevice = 1
 roiWidth = (200,1280)
 roiHeight = (400,500)
-
-# - Networking
-BaseURL = "http://localhost:8080"
-updatePeriod = 20   #seconds
-client = requests.session()
-
-def postData(up, down, url):
-    response = client.post(URL + "/login", data=login_data, cookies=client.cookies)
-    print(up)
+updatePeriod = 20   #seconds to update the server
+updating = False
 
 
 def abs(a):
@@ -233,7 +223,8 @@ while ret:
                 if newCount == 2:       # seperation
                     if v.dirChanged == True and isCloseToEdge(v, 25):
                         totalCarsCount -= 1
-                        if v.direction == "up": upCarsCount -= 1
+                        if v.direction == "up":
+                            upCarsCount -= 1
                         else: downCarsCount -= 1
                 if newCount == 1 and countClosest(v, Vehicles, "unmatched", intersectionThreshold) == 2:   # intersection, however there should be 2 close "unmatched"
                     if closest.dirChanged != True and v.dirChanged == True: closest.dirChanged = True
@@ -261,6 +252,15 @@ while ret:
 
 
     # Info
+    currSec = int(datetime.now().strftime('%S'))
+    if currSec % 5 == 0:
+        if updating != True:
+            #print('Update Server!!!' + str(currSec))
+            thread = NetworkThread(upCarsCount, downCarsCount)
+            thread.start()
+            updating = True
+    else: updating = False
+
     cv2.putText(darkBlurred, 'Detected Objects : ' + str(len(newVehicles)) + "  [ "  + getNamesOfVehicles(newVehicles) + "]", (10,30), 2, 0.7, (0,255,0))
     cv2.putText(darkBlurred, 'Current Vehicles : ' + str(len(Vehicles)) + "  [ "  + getNamesOfVehicles(Vehicles) + "]", (10,60), 2, 0.7, (0,255,0))
     cv2.putText(darkBlurred, 'Total Count : ' + str(totalCarsCount), (10,90), 2, 0.7, (0,255,0))
