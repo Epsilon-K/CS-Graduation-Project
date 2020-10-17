@@ -2,9 +2,32 @@ import numpy as np
 import cv2
 import random
 import string
-import NetworkThread    # local
 import re
 from datetime import datetime
+
+import threading
+import requests
+import sys
+
+# - Networking
+SERVER_URL = "https://httpbin.org"
+ClientCamID = 1 # this needs to be configured
+client = requests.session()
+
+class myThread (threading.Thread):
+   def __init__(self, up, down):
+      threading.Thread.__init__(self)
+      self.up = up
+      self.down = down
+   def run(self):
+      data = {"CamId":ClientCamID, "up":self.up, "down":self.down}
+      response = client.post(SERVER_URL + "/post", data=data, cookies=client.cookies)
+      if response.status_code == 200:
+          print ('Post Successfully :  {up:'+str(self.up)+', down:'+str(self.down)+'}')
+      else:
+          print ("Network Error : " + str(response.status_code))
+
+#-------------------------------- Network
 
   # Config Vars --------------------------------------------
 # - Recognotion
@@ -251,12 +274,13 @@ while ret:
             cv2.circle(darkBlurred, (int(pt[0]), int(pt[1])), 2, (255,150,0), 2)
 
 
-    # Info
+
     currSec = int(datetime.now().strftime('%S'))
-    if currSec % 5 == 0:
+    if currSec % 5 == 0:   # Every 20 seconds
         if updating != True:
             #print('Update Server!!!' + str(currSec))
-            thread = NetworkThread(upCarsCount, downCarsCount)
+            print(SERVER_URL)
+            thread = myThread(upCarsCount, downCarsCount)
             thread.start()
             updating = True
     else: updating = False

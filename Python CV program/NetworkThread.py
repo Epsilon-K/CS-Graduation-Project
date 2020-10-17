@@ -3,7 +3,7 @@ import requests
 import sys
 
 # - Networking
-SERVER_URL = "http://localhost:8080"
+SERVER_URL = "https://httpbin.org"
 ClientCamID = 1 # this needs to be configured
 client = requests.session()
 
