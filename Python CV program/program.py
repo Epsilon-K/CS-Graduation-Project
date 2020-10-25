@@ -143,7 +143,7 @@ while ret:
 
     cv2.rectangle(darkBlurred, (roiWidth[0],roiHeight[0]), (roiWidth[1],roiHeight[1]), (0,255,200), 2)    #drawing a green Rect
     roi = frame[roiHeight[0]:roiHeight[1], roiWidth[0]:roiWidth[1]]                                       # Region Of Interest
-    roi = cv2.GaussianBlur(roi, (35,35), 0)
+    roi = cv2.GaussianBlur(roi, (5,5), 0)
     darkBlurred[roiHeight[0]:roiHeight[1], roiWidth[0]:roiWidth[1]] = roi
 
 
