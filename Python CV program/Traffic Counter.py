@@ -233,11 +233,6 @@ while ret:
             v.state = "new"
             Vehicles.append(v)
         else:
-            # is this v new or was it in an old frame???
-            # get the closest v from Vehicles
-            # and compare it's distance
-            # if it's close enough then assume it is the same
-            # Else it's NEW
             closest = getClosest(v, Vehicles, "unmatched")
             if v.distToOther(closest) < trackingThreshold:
                 # same same!
@@ -260,12 +255,6 @@ while ret:
                 v.state = "new"
                 Vehicles.append(v)
 
-    # ----------  Handling unmatched blobs  -----------------
-    # could be the result of two intersecting blobs becoming one big blob
-        # in which case there should be two "unmatched" blobs and one big "new" blob
-    # or the result of a blob that is seperated into two
-        # in which case there should be a big "unmatched" blob at intersectionThreshold distance from v
-    # or just going out of frame 'ROI'
     intersectionThreshold = 130
     i = 0
     while i < len(Vehicles):
