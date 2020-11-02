@@ -11,17 +11,15 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
-#include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QSpinBox>
-#include <QtWidgets/QStatusBar>
-#include <QtWidgets/QToolBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -34,11 +32,11 @@ public:
     QVBoxLayout *verticalLayout_3;
     QHBoxLayout *horizontalLayout;
     QLabel *label;
-    QSpinBox *spinBox;
+    QSpinBox *devIdSB;
     QSpacerItem *horizontalSpacer_2;
     QHBoxLayout *horizontalLayout_2;
     QLabel *label_2;
-    QSpinBox *spinBox_2;
+    QSpinBox *clientIdSB;
     QSpacerItem *horizontalSpacer_3;
     QSpacerItem *verticalSpacer;
     QHBoxLayout *horizontalLayout_9;
@@ -46,39 +44,49 @@ public:
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout_3;
     QLabel *label_3;
-    QSpinBox *spinBox_3;
+    QSpinBox *roiLSB;
     QHBoxLayout *horizontalLayout_4;
     QLabel *label_4;
-    QSpinBox *spinBox_4;
+    QSpinBox *roiRSB;
     QHBoxLayout *horizontalLayout_5;
     QLabel *label_5;
-    QSpinBox *spinBox_5;
+    QSpinBox *roiTSB;
     QHBoxLayout *horizontalLayout_6;
     QLabel *label_6;
-    QSpinBox *spinBox_6;
-    QSpacerItem *horizontalSpacer;
+    QSpinBox *roiBSB;
     QGroupBox *groupBox_2;
     QVBoxLayout *verticalLayout_2;
     QHBoxLayout *horizontalLayout_7;
     QLabel *label_7;
-    QLineEdit *lineEdit;
+    QLineEdit *serverUrlLineEdit;
     QHBoxLayout *horizontalLayout_8;
     QLabel *label_8;
-    QSpinBox *spinBox_7;
+    QSpinBox *serverUpdateSB;
+    QGroupBox *groupBox_3;
+    QVBoxLayout *verticalLayout_4;
+    QCheckBox *sendCB;
+    QCheckBox *randomIdCB;
+    QHBoxLayout *horizontalLayout_13;
+    QHBoxLayout *horizontalLayout_12;
+    QHBoxLayout *horizontalLayout_11;
+    QLabel *label_9;
+    QSpinBox *randBeginSB;
+    QLabel *label_10;
+    QSpinBox *randEndSB;
+    QHBoxLayout *horizontalLayout_14;
+    QCheckBox *useVideoCB;
+    QLineEdit *videoNameLineEdit;
     QHBoxLayout *horizontalLayout_10;
     QSpacerItem *horizontalSpacer_4;
-    QPushButton *pushButton_2;
-    QPushButton *pushButton;
+    QPushButton *saveBtn;
+    QPushButton *runBtn;
     QSpacerItem *horizontalSpacer_5;
-    QMenuBar *menuBar;
-    QToolBar *mainToolBar;
-    QStatusBar *statusBar;
 
     void setupUi(QMainWindow *MT_VisionUI)
     {
         if (MT_VisionUI->objectName().isEmpty())
             MT_VisionUI->setObjectName(QString::fromUtf8("MT_VisionUI"));
-        MT_VisionUI->resize(707, 409);
+        MT_VisionUI->resize(707, 414);
         centralWidget = new QWidget(MT_VisionUI);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         verticalLayout_3 = new QVBoxLayout(centralWidget);
@@ -93,10 +101,10 @@ public:
 
         horizontalLayout->addWidget(label);
 
-        spinBox = new QSpinBox(centralWidget);
-        spinBox->setObjectName(QString::fromUtf8("spinBox"));
+        devIdSB = new QSpinBox(centralWidget);
+        devIdSB->setObjectName(QString::fromUtf8("devIdSB"));
 
-        horizontalLayout->addWidget(spinBox);
+        horizontalLayout->addWidget(devIdSB);
 
         horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -113,10 +121,10 @@ public:
 
         horizontalLayout_2->addWidget(label_2);
 
-        spinBox_2 = new QSpinBox(centralWidget);
-        spinBox_2->setObjectName(QString::fromUtf8("spinBox_2"));
+        clientIdSB = new QSpinBox(centralWidget);
+        clientIdSB->setObjectName(QString::fromUtf8("clientIdSB"));
 
-        horizontalLayout_2->addWidget(spinBox_2);
+        horizontalLayout_2->addWidget(clientIdSB);
 
         horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -138,6 +146,7 @@ public:
         verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setContentsMargins(2, 2, 2, 2);
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setSpacing(6);
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
@@ -146,12 +155,12 @@ public:
 
         horizontalLayout_3->addWidget(label_3);
 
-        spinBox_3 = new QSpinBox(groupBox);
-        spinBox_3->setObjectName(QString::fromUtf8("spinBox_3"));
-        spinBox_3->setMaximum(65000);
-        spinBox_3->setValue(200);
+        roiLSB = new QSpinBox(groupBox);
+        roiLSB->setObjectName(QString::fromUtf8("roiLSB"));
+        roiLSB->setMaximum(65000);
+        roiLSB->setValue(200);
 
-        horizontalLayout_3->addWidget(spinBox_3);
+        horizontalLayout_3->addWidget(roiLSB);
 
 
         verticalLayout->addLayout(horizontalLayout_3);
@@ -164,12 +173,12 @@ public:
 
         horizontalLayout_4->addWidget(label_4);
 
-        spinBox_4 = new QSpinBox(groupBox);
-        spinBox_4->setObjectName(QString::fromUtf8("spinBox_4"));
-        spinBox_4->setMaximum(65000);
-        spinBox_4->setValue(1280);
+        roiRSB = new QSpinBox(groupBox);
+        roiRSB->setObjectName(QString::fromUtf8("roiRSB"));
+        roiRSB->setMaximum(65000);
+        roiRSB->setValue(1280);
 
-        horizontalLayout_4->addWidget(spinBox_4);
+        horizontalLayout_4->addWidget(roiRSB);
 
 
         verticalLayout->addLayout(horizontalLayout_4);
@@ -182,12 +191,12 @@ public:
 
         horizontalLayout_5->addWidget(label_5);
 
-        spinBox_5 = new QSpinBox(groupBox);
-        spinBox_5->setObjectName(QString::fromUtf8("spinBox_5"));
-        spinBox_5->setMaximum(65000);
-        spinBox_5->setValue(400);
+        roiTSB = new QSpinBox(groupBox);
+        roiTSB->setObjectName(QString::fromUtf8("roiTSB"));
+        roiTSB->setMaximum(65000);
+        roiTSB->setValue(400);
 
-        horizontalLayout_5->addWidget(spinBox_5);
+        horizontalLayout_5->addWidget(roiTSB);
 
 
         verticalLayout->addLayout(horizontalLayout_5);
@@ -200,12 +209,12 @@ public:
 
         horizontalLayout_6->addWidget(label_6);
 
-        spinBox_6 = new QSpinBox(groupBox);
-        spinBox_6->setObjectName(QString::fromUtf8("spinBox_6"));
-        spinBox_6->setMaximum(65000);
-        spinBox_6->setValue(500);
+        roiBSB = new QSpinBox(groupBox);
+        roiBSB->setObjectName(QString::fromUtf8("roiBSB"));
+        roiBSB->setMaximum(65000);
+        roiBSB->setValue(500);
 
-        horizontalLayout_6->addWidget(spinBox_6);
+        horizontalLayout_6->addWidget(roiBSB);
 
 
         verticalLayout->addLayout(horizontalLayout_6);
@@ -213,16 +222,13 @@ public:
 
         horizontalLayout_9->addWidget(groupBox);
 
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_9->addItem(horizontalSpacer);
-
         groupBox_2 = new QGroupBox(centralWidget);
         groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
         verticalLayout_2 = new QVBoxLayout(groupBox_2);
         verticalLayout_2->setSpacing(6);
         verticalLayout_2->setContentsMargins(11, 11, 11, 11);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        verticalLayout_2->setContentsMargins(2, 2, 2, 2);
         horizontalLayout_7 = new QHBoxLayout();
         horizontalLayout_7->setSpacing(6);
         horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
@@ -231,10 +237,10 @@ public:
 
         horizontalLayout_7->addWidget(label_7);
 
-        lineEdit = new QLineEdit(groupBox_2);
-        lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
+        serverUrlLineEdit = new QLineEdit(groupBox_2);
+        serverUrlLineEdit->setObjectName(QString::fromUtf8("serverUrlLineEdit"));
 
-        horizontalLayout_7->addWidget(lineEdit);
+        horizontalLayout_7->addWidget(serverUrlLineEdit);
 
 
         verticalLayout_2->addLayout(horizontalLayout_7);
@@ -247,18 +253,99 @@ public:
 
         horizontalLayout_8->addWidget(label_8);
 
-        spinBox_7 = new QSpinBox(groupBox_2);
-        spinBox_7->setObjectName(QString::fromUtf8("spinBox_7"));
-        spinBox_7->setMaximum(65000);
-        spinBox_7->setValue(30);
+        serverUpdateSB = new QSpinBox(groupBox_2);
+        serverUpdateSB->setObjectName(QString::fromUtf8("serverUpdateSB"));
+        serverUpdateSB->setMaximum(65000);
+        serverUpdateSB->setValue(30);
 
-        horizontalLayout_8->addWidget(spinBox_7);
+        horizontalLayout_8->addWidget(serverUpdateSB);
 
 
         verticalLayout_2->addLayout(horizontalLayout_8);
 
 
         horizontalLayout_9->addWidget(groupBox_2);
+
+        groupBox_3 = new QGroupBox(centralWidget);
+        groupBox_3->setObjectName(QString::fromUtf8("groupBox_3"));
+        verticalLayout_4 = new QVBoxLayout(groupBox_3);
+        verticalLayout_4->setSpacing(6);
+        verticalLayout_4->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
+        verticalLayout_4->setContentsMargins(2, 2, 2, 2);
+        sendCB = new QCheckBox(groupBox_3);
+        sendCB->setObjectName(QString::fromUtf8("sendCB"));
+        sendCB->setChecked(true);
+
+        verticalLayout_4->addWidget(sendCB);
+
+        randomIdCB = new QCheckBox(groupBox_3);
+        randomIdCB->setObjectName(QString::fromUtf8("randomIdCB"));
+        randomIdCB->setChecked(true);
+
+        verticalLayout_4->addWidget(randomIdCB);
+
+        horizontalLayout_13 = new QHBoxLayout();
+        horizontalLayout_13->setSpacing(6);
+        horizontalLayout_13->setObjectName(QString::fromUtf8("horizontalLayout_13"));
+        horizontalLayout_12 = new QHBoxLayout();
+        horizontalLayout_12->setSpacing(6);
+        horizontalLayout_12->setObjectName(QString::fromUtf8("horizontalLayout_12"));
+        horizontalLayout_11 = new QHBoxLayout();
+        horizontalLayout_11->setSpacing(6);
+        horizontalLayout_11->setObjectName(QString::fromUtf8("horizontalLayout_11"));
+        label_9 = new QLabel(groupBox_3);
+        label_9->setObjectName(QString::fromUtf8("label_9"));
+
+        horizontalLayout_11->addWidget(label_9);
+
+        randBeginSB = new QSpinBox(groupBox_3);
+        randBeginSB->setObjectName(QString::fromUtf8("randBeginSB"));
+        randBeginSB->setMaximum(65000);
+        randBeginSB->setValue(0);
+
+        horizontalLayout_11->addWidget(randBeginSB);
+
+
+        horizontalLayout_12->addLayout(horizontalLayout_11);
+
+        label_10 = new QLabel(groupBox_3);
+        label_10->setObjectName(QString::fromUtf8("label_10"));
+
+        horizontalLayout_12->addWidget(label_10);
+
+        randEndSB = new QSpinBox(groupBox_3);
+        randEndSB->setObjectName(QString::fromUtf8("randEndSB"));
+        randEndSB->setMaximum(65000);
+        randEndSB->setValue(3);
+
+        horizontalLayout_12->addWidget(randEndSB);
+
+
+        horizontalLayout_13->addLayout(horizontalLayout_12);
+
+
+        verticalLayout_4->addLayout(horizontalLayout_13);
+
+        horizontalLayout_14 = new QHBoxLayout();
+        horizontalLayout_14->setSpacing(6);
+        horizontalLayout_14->setObjectName(QString::fromUtf8("horizontalLayout_14"));
+        useVideoCB = new QCheckBox(groupBox_3);
+        useVideoCB->setObjectName(QString::fromUtf8("useVideoCB"));
+        useVideoCB->setChecked(true);
+
+        horizontalLayout_14->addWidget(useVideoCB);
+
+        videoNameLineEdit = new QLineEdit(groupBox_3);
+        videoNameLineEdit->setObjectName(QString::fromUtf8("videoNameLineEdit"));
+
+        horizontalLayout_14->addWidget(videoNameLineEdit);
+
+
+        verticalLayout_4->addLayout(horizontalLayout_14);
+
+
+        horizontalLayout_9->addWidget(groupBox_3);
 
 
         verticalLayout_3->addLayout(horizontalLayout_9);
@@ -270,15 +357,15 @@ public:
 
         horizontalLayout_10->addItem(horizontalSpacer_4);
 
-        pushButton_2 = new QPushButton(centralWidget);
-        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
+        saveBtn = new QPushButton(centralWidget);
+        saveBtn->setObjectName(QString::fromUtf8("saveBtn"));
 
-        horizontalLayout_10->addWidget(pushButton_2);
+        horizontalLayout_10->addWidget(saveBtn);
 
-        pushButton = new QPushButton(centralWidget);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+        runBtn = new QPushButton(centralWidget);
+        runBtn->setObjectName(QString::fromUtf8("runBtn"));
 
-        horizontalLayout_10->addWidget(pushButton);
+        horizontalLayout_10->addWidget(runBtn);
 
         horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -288,16 +375,6 @@ public:
         verticalLayout_3->addLayout(horizontalLayout_10);
 
         MT_VisionUI->setCentralWidget(centralWidget);
-        menuBar = new QMenuBar(MT_VisionUI);
-        menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 707, 20));
-        MT_VisionUI->setMenuBar(menuBar);
-        mainToolBar = new QToolBar(MT_VisionUI);
-        mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
-        MT_VisionUI->addToolBar(Qt::TopToolBarArea, mainToolBar);
-        statusBar = new QStatusBar(MT_VisionUI);
-        statusBar->setObjectName(QString::fromUtf8("statusBar"));
-        MT_VisionUI->setStatusBar(statusBar);
 
         retranslateUi(MT_VisionUI);
 
@@ -316,9 +393,17 @@ public:
         label_6->setText(QCoreApplication::translate("MT_VisionUI", "bottom side :", nullptr));
         groupBox_2->setTitle(QCoreApplication::translate("MT_VisionUI", "Network", nullptr));
         label_7->setText(QCoreApplication::translate("MT_VisionUI", "Server URL : ", nullptr));
+        serverUrlLineEdit->setText(QCoreApplication::translate("MT_VisionUI", "http://192.168.43.234/mtApi/api/", nullptr));
         label_8->setText(QCoreApplication::translate("MT_VisionUI", "Update Period (seconds) :", nullptr));
-        pushButton_2->setText(QCoreApplication::translate("MT_VisionUI", "Save Settings", nullptr));
-        pushButton->setText(QCoreApplication::translate("MT_VisionUI", "Run Program", nullptr));
+        groupBox_3->setTitle(QCoreApplication::translate("MT_VisionUI", "Testing", nullptr));
+        sendCB->setText(QCoreApplication::translate("MT_VisionUI", "Send to server", nullptr));
+        randomIdCB->setText(QCoreApplication::translate("MT_VisionUI", "use random range for id", nullptr));
+        label_9->setText(QCoreApplication::translate("MT_VisionUI", "from :", nullptr));
+        label_10->setText(QCoreApplication::translate("MT_VisionUI", "To :", nullptr));
+        useVideoCB->setText(QCoreApplication::translate("MT_VisionUI", "use Video", nullptr));
+        videoNameLineEdit->setText(QCoreApplication::translate("MT_VisionUI", "test 1.mp4", nullptr));
+        saveBtn->setText(QCoreApplication::translate("MT_VisionUI", "Save Settings", nullptr));
+        runBtn->setText(QCoreApplication::translate("MT_VisionUI", "Run Program", nullptr));
     } // retranslateUi
 
 };

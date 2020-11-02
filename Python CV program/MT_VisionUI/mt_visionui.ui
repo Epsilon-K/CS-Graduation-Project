@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>707</width>
-    <height>409</height>
+    <height>414</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -25,7 +25,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QSpinBox" name="spinBox"/>
+       <widget class="QSpinBox" name="devIdSB"/>
       </item>
       <item>
        <spacer name="horizontalSpacer_2">
@@ -52,7 +52,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QSpinBox" name="spinBox_2"/>
+       <widget class="QSpinBox" name="clientIdSB"/>
       </item>
       <item>
        <spacer name="horizontalSpacer_3">
@@ -93,6 +93,18 @@
          <string>Region Of Interest</string>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout">
+         <property name="leftMargin">
+          <number>2</number>
+         </property>
+         <property name="topMargin">
+          <number>2</number>
+         </property>
+         <property name="rightMargin">
+          <number>2</number>
+         </property>
+         <property name="bottomMargin">
+          <number>2</number>
+         </property>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_3">
            <item>
@@ -103,7 +115,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QSpinBox" name="spinBox_3">
+            <widget class="QSpinBox" name="roiLSB">
              <property name="maximum">
               <number>65000</number>
              </property>
@@ -124,7 +136,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QSpinBox" name="spinBox_4">
+            <widget class="QSpinBox" name="roiRSB">
              <property name="maximum">
               <number>65000</number>
              </property>
@@ -145,7 +157,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QSpinBox" name="spinBox_5">
+            <widget class="QSpinBox" name="roiTSB">
              <property name="maximum">
               <number>65000</number>
              </property>
@@ -166,7 +178,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QSpinBox" name="spinBox_6">
+            <widget class="QSpinBox" name="roiBSB">
              <property name="maximum">
               <number>65000</number>
              </property>
@@ -181,24 +193,23 @@
        </widget>
       </item>
       <item>
-       <spacer name="horizontalSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
        <widget class="QGroupBox" name="groupBox_2">
         <property name="title">
          <string>Network</string>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_2">
+         <property name="leftMargin">
+          <number>2</number>
+         </property>
+         <property name="topMargin">
+          <number>2</number>
+         </property>
+         <property name="rightMargin">
+          <number>2</number>
+         </property>
+         <property name="bottomMargin">
+          <number>2</number>
+         </property>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_7">
            <item>
@@ -209,7 +220,11 @@
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="lineEdit"/>
+            <widget class="QLineEdit" name="serverUrlLineEdit">
+             <property name="text">
+              <string>http://192.168.43.234/mtApi/api/</string>
+             </property>
+            </widget>
            </item>
           </layout>
          </item>
@@ -223,12 +238,120 @@
             </widget>
            </item>
            <item>
-            <widget class="QSpinBox" name="spinBox_7">
+            <widget class="QSpinBox" name="serverUpdateSB">
              <property name="maximum">
               <number>65000</number>
              </property>
              <property name="value">
               <number>30</number>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupBox_3">
+        <property name="title">
+         <string>Testing</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_4">
+         <property name="leftMargin">
+          <number>2</number>
+         </property>
+         <property name="topMargin">
+          <number>2</number>
+         </property>
+         <property name="rightMargin">
+          <number>2</number>
+         </property>
+         <property name="bottomMargin">
+          <number>2</number>
+         </property>
+         <item>
+          <widget class="QCheckBox" name="sendCB">
+           <property name="text">
+            <string>Send to server</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="randomIdCB">
+           <property name="text">
+            <string>use random range for id</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_13">
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_12">
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_11">
+               <item>
+                <widget class="QLabel" name="label_9">
+                 <property name="text">
+                  <string>from :</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="randBeginSB">
+                 <property name="maximum">
+                  <number>65000</number>
+                 </property>
+                 <property name="value">
+                  <number>0</number>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_10">
+               <property name="text">
+                <string>To :</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QSpinBox" name="randEndSB">
+               <property name="maximum">
+                <number>65000</number>
+               </property>
+               <property name="value">
+                <number>3</number>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_14">
+           <item>
+            <widget class="QCheckBox" name="useVideoCB">
+             <property name="text">
+              <string>use Video</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="videoNameLineEdit">
+             <property name="text">
+              <string>test 1.mp4</string>
              </property>
             </widget>
            </item>
@@ -255,14 +378,14 @@
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QPushButton" name="saveBtn">
         <property name="text">
          <string>Save Settings</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="runBtn">
         <property name="text">
          <string>Run Program</string>
         </property>
@@ -285,25 +408,6 @@
     </item>
    </layout>
   </widget>
-  <widget class="QMenuBar" name="menuBar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>707</width>
-     <height>20</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QToolBar" name="mainToolBar">
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
-  </widget>
-  <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
