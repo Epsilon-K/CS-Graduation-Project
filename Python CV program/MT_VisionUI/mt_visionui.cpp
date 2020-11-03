@@ -40,8 +40,9 @@ void MT_VisionUI::on_saveBtn_clicked()
 
 void MT_VisionUI::on_runBtn_clicked()
 {
-    QString currPath = QDir::currentPath();
-
+    QString cmd = "\"" + QDir::currentPath() + "/Traffic Counter.exe\"";
+    qDebug() << cmd;
+    system(cmd.toStdString().c_str());
 }
 
 
