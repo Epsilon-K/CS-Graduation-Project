@@ -13,12 +13,16 @@ import sys
 SERVER_URL = "http://192.168.43.234/mtApi/api/"
 ClientCamID = 1
 client = requests.session()
+sendToServer = "true"     #make false for testing without server
+useRandomId = "true"
+randSt = 0
+randEnd = 1
 
 # - Recognotion Vars
-videoFileName = "test 1.mp4"
+streamSource = "test 1.mp4"
 cameraDevice = 1
-roiWidth = (200, 1280)
-roiHeight = (400, 500)
+roiWidth = [200, 1280]
+roiHeight = [400, 500]
 updatePeriod = 30  # seconds to update the server
 updating = False
 
@@ -28,7 +32,43 @@ newVehicles = []
 totalCarsCount = 0
 upCarsCount = 0
 downCarsCount = 0
-# ------
+
+
+# ------ Load Settings
+file = open("settings.txt", "r")
+line = file.readline()
+streamSource = int(line[line.find(":")+2:-1])   # CamDevId
+line = file.readline()
+ClientCamID = int(line[line.find(":")+2:-1])
+line = file.readline()
+roiWidth[0] = int(line[line.find(":")+2:-1])
+line = file.readline()
+roiWidth[1] = int(line[line.find(":")+2:-1])
+line = file.readline()
+roiHeight[0] = int(line[line.find(":")+2:-1])
+line = file.readline()
+roiHeight[1] = int(line[line.find(":")+2:-1])
+line = file.readline()
+SERVER_URL = line[line.find(":")+2:-1]
+line = file.readline()
+updatePeriod = int(line[line.find(":")+2:-1])
+line = file.readline()
+sendToServer = line[line.find(":")+2:-1]
+line = file.readline()
+useRandomId = line[line.find(":")+2:-1]
+line = file.readline()
+randSt = int(line[line.find(":")+2:-1])
+line = file.readline()
+randEnd = int(line[line.find(":")+2:-1])
+line = file.readline()
+if line[line.find(":")+2:-1] == "true":
+    line = file.readline()
+    streamSource = str(line[line.find(":")+2:-1])
+
+
+
+
+file.close()
 
 
 class myThread (threading.Thread):
@@ -41,8 +81,16 @@ class myThread (threading.Thread):
         global upCarsCount
         global downCarsCount
         global totalCarsCount
+        global useRandomId
+
+        idChoice = []
+        if useRandomId == "true":
+            for id in range(randSt, randEnd+1):
+                idChoice.insert(id)
+        else:
+            idChoice.insert(ClientCamID)
         data = {"CameraID": random.choice(
-            [1, 2]), "InCount": self.up, "OutCount": self.down}
+            idChoice), "InCount": self.up, "OutCount": self.down}
         response = client.post(SERVER_URL + "/Camera",
                                data=data, cookies=client.cookies)
         if response.status_code == 200:
@@ -135,7 +183,7 @@ def isCloseToEdge(v, thresh=25):
         return True
     else : return False
 
-cap = cv2.VideoCapture(videoFileName)
+cap = cv2.VideoCapture(streamSource)
 fourcc = cv2.VideoWriter_fourcc(*'XVID')
 out = cv2.VideoWriter('last run.mp4', fourcc, 25.0, (1280,720))
 
@@ -143,17 +191,8 @@ ret, frame = cap.read()
 dark = frame
 fgbg = cv2.createBackgroundSubtractorMOG2()
 
-# ------- Analasys Variables :
-Vehicles = []
-newVehicles = []
-totalCarsCount = 0
-upCarsCount = 0
-downCarsCount = 0
-#------
 
 while ret:
-    #gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-
     dark[0:720, 0:1280] = ([0,0,0])     #fills the region with black color [0,0,0]
     blurred = cv2.GaussianBlur(frame, (35,35), 0)   #Blurred version of the frame
     darkBlurred = cv2.addWeighted(blurred, 0.3, dark, 0.7, 0)   #Mixed effect of blurr and tinted black
@@ -284,11 +323,15 @@ while ret:
     currSec = int(datetime.now().strftime('%S'))
     if currSec % updatePeriod == 0:
         if updating != True:
-            print(SERVER_URL)
-            #thread = myThread(upCarsCount, downCarsCount)
-            #thread.start()
             updating = True
-    else: updating = False
+            if sendToServer == "true":
+                print("sending to " + SERVER_URL)
+                thread = myThread(upCarsCount, downCarsCount)
+                thread.start()
+            else:
+                print("Send to server is disabled")
+    else:
+        updating = False
 
     cv2.putText(darkBlurred, 'press q to exit..',
                 (600, 20), 2, 0.7, (0, 255, 0))

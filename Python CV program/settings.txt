@@ -1,0 +1,14 @@
+camera device id: 0
+client id: 2
+roi left: 200
+roi right: 1280
+roi top: 400
+roi bottom: 500
+server url: http://192.168.43.234/mtApi/api/
+server update: 5
+send to server: true
+random id: true
+random start: 0
+random end: 3
+use video: true
+video path: test 1.mp4

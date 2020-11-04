@@ -35,7 +35,7 @@ void MT_VisionUI::on_saveBtn_clicked()
     out << "random start: " << ui->randBeginSB->value() << "\n";
     out << "random end: " << ui->randEndSB->value() << "\n";
     out << "use video: " << (ui->useVideoCB->isChecked() ? "true" : "false") << "\n";
-    out << "video path: " << ui->videoNameLineEdit->text();
+    out << "video path: " << ui->videoNameLineEdit->text() << "\n";
 }
 
 void MT_VisionUI::on_runBtn_clicked()
